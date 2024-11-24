@@ -1,5 +1,6 @@
 ﻿using API_Sucursales_Practica.Context;
 using API_Sucursales_Practica.Domain;
+using API_Sucursales_Practica.DTOs;
 using API_Sucursales_Practica.Repository.Interfaces;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -32,20 +33,37 @@ namespace API_Sucursales_Practica.Repository
             return sucursalMostRecentNotBsAS;
         }
 
-        public async Task<SucursalEntity> UpdateSucursalByIdAsync(SucursalEntity sucursalUpdate)
+        public async Task<SucursalEntity> UpdateSucursalByIdAsync(UpdateSucursalDTO updateDTO)
         {
-            var foundSucursal = await _context.Sucursales.Where(x =>
-            x.Id == sucursalUpdate.Id
-            ).FirstOrDefaultAsync();
 
-            if (foundSucursal != null)
+            using var transaction = await _context.Database.BeginTransactionAsync();
+
+            try
             {
-                //
-
+            var foundSucursal = await _context.Sucursales
+           .Include(x => x.Provincia)
+           .Include(x => x.Tipo)
+           .FirstOrDefaultAsync(x => x.Id == Guid.Parse(updateDTO.Id));
+                if (foundSucursal == null)
+                {
+                    return null;
+                }
+                _mapper.Map(updateDTO, foundSucursal);
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+                return foundSucursal;
 
             }
+            catch 
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
 
-            return null;
+       
+           
         }
+
+
     }
 }

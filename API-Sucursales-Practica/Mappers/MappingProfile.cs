@@ -1,4 +1,5 @@
-﻿using API_Sucursales_Practica.DTOs;
+﻿using API_Sucursales_Practica.Domain;
+using API_Sucursales_Practica.DTOs;
 using AutoMapper;
 using Practica_API_Sucursales.Domain;
 
@@ -44,8 +45,21 @@ namespace API_Sucursales_Practica.Mappers
                     srcMember !=null
                 ));
 
+            /*
+            .ForAllMembers(): Aplica una configuración a todos los miembros del mapeo.
+            opts.Condition((src, dest, srcMember) => srcMember != null):
 
-            CreateMap<ConfiguracionDTO, ConfiguracionDTO>().ReverseMap();
+            src: es el objeto fuente (UpdateSucursalDTO)
+            dest: es el objeto destino (SucursalEntity)
+            srcMember: es el valor específico del miembro que se está mapeando
+
+            La condición srcMember != null significa que solo se realizará el mapeo si el valor en el DTO no es null
+
+            */
+
+
+
+            CreateMap<ConfiguracionEntity, ConfiguracionDTO>().ReverseMap();
 
 
 
