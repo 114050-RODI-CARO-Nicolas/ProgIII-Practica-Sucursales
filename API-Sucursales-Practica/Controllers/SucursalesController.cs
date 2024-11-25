@@ -39,9 +39,21 @@ namespace API_Sucursales_Practica.Controllers
             var response = await _sucursalService.GetSucursalMostRecentNotBuenosAiresAsync();
             if (!response.Success)
             {
-                return StatusCode(500, response.Message);
+                return StatusCode(500, response);
             }
             return Ok();    
+        }
+
+        [HttpPost("sucursales")]
+        public async Task<IActionResult> CreateSurcursal([FromBody] CreateSucursalDTO createSucursalDTO)
+        {
+            var response = await _sucursalService.CreateSucursalAsync(createSucursalDTO);
+            if (!response.Success)
+            {
+                return StatusCode(500, response);
+
+            }
+            return StatusCode(201, response);
         }
 
         [HttpPut("sucursales")]

@@ -1,0 +1,31 @@
+Valores Sucursal IDs claves foraneas
+
+
+Tipo de Sucursal:
+
+Id	                                    Nombre
+4A3E9F04-C7A7-4B4E-98A5-2F7277599BCC	Pequeña
+CC8C9384-1290-4D66-B379-A5D0B24FCAA4	Grande
+
+Provincia:
+
+Id	                                    Nombre
+3B04A1AD-FAFD-4142-837E-5F02816C3649	Cordoba
+A76B2A6C-3EF4-49DC-B8E5-690DDA627417	Buenos Aires
+E34A14E4-7C89-4609-A06B-86954E690ACA	Santa Fe
+
+
+
+
+Prueba json POST CREATE SUCURSAL:
+
+{
+  "nombre": "Nueva sucursal creada por API",
+  "ciudad": "Cordoba",
+  "idProvincia": "3B04A1AD-FAFD-4142-837E-5F02816C3649",
+  "idTipo": "CC8C9384-1290-4D66-B379-A5D0B24FCAA4",
+  "telefono": "45878761",
+  "nombreTitular": "Nicolas",
+  "apellidoTitular": "Rodi",
+  "fechaAlta": "2024-11-25T00:40:51.786Z"
+}

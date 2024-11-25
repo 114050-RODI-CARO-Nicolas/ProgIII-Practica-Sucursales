@@ -20,7 +20,8 @@ namespace API_Sucursales_Practica.Repository
             _mapper=mapper;
         }
 
-   
+    
+
         public async Task<SucursalEntity> GetSucursalMostRecentNotBuenosAiresAsync()
         {
             var sucursalMostRecentNotBsAS = await _context.Sucursales.Where(x =>
@@ -59,9 +60,36 @@ namespace API_Sucursales_Practica.Repository
                 await transaction.RollbackAsync();
                 throw;
             }
-
-       
            
+        }
+
+
+        public async Task<SucursalEntity> CreateSucursalAsync(CreateSucursalDTO createDTO)
+        {
+           using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var newSucursal = _mapper.Map<SucursalEntity>(createDTO);
+                await _context.Sucursales.AddAsync(newSucursal);
+                await _context.SaveChangesAsync();
+
+                //Recargar la entidad
+
+                var createdSucursal = await _context.Sucursales
+                    .Include(x => x.Provincia)
+                    .Include(x => x.Tipo)
+                    .FirstOrDefaultAsync(x => x.Id == newSucursal.Id);
+
+                await transaction.CommitAsync();
+                return createdSucursal;
+
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+
         }
 
 

@@ -7,8 +7,8 @@ namespace API_Sucursales_Practica.Repository.Interfaces
     public interface ISucursalRepository
     {
         Task<SucursalEntity> GetSucursalMostRecentNotBuenosAiresAsync();
-      
 
+        Task<SucursalEntity> CreateSucursalAsync(CreateSucursalDTO createDTO);
         Task<SucursalEntity> UpdateSucursalByIdAsync(UpdateSucursalDTO updateDTO);
 
     }
