@@ -12,14 +12,101 @@ namespace API_Sucursales_Practica.Services
 
         public SucursalService(ISucursalRepository sucursalRepository, IMapper mapper)
         {
-           
-
-
+          
             this._sucursalRepository=sucursalRepository;
             this._mapper = mapper;
         }
 
-    
+        public async Task<BaseResponse<IEnumerable<ProvinciaDTO>>> GetAllProvinciasAsync()
+        {
+           var response = new BaseResponse<IEnumerable<ProvinciaDTO>>();
+            try
+            {
+                var provincias = await _sucursalRepository.GetAllProvinciaAsync();
+                if (provincias==null)
+                {
+                    response.Success = false;
+                    response.Data = null;
+                    response.Message = "Hubo un error al obtener las provincias";
+                    return response;
+                }
+                response.Success = true;
+                response.Data = _mapper.Map<List<ProvinciaDTO>>(provincias);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+
+                response.Success=false;
+                response.Data = null;
+                response.Message=ex.Message + " " + ex.InnerException;
+                return response;
+            }
+     
+        }
+
+        public async Task<BaseResponse<IEnumerable<TipoDTO>>> GetAllTiposAsync()
+        {
+            var response = new BaseResponse<IEnumerable<TipoDTO>>();
+            try
+            {
+                var tipos = await _sucursalRepository.GetAllTipoAsync();
+                if (tipos==null)
+                {
+                    response.Success = false;
+                    response.Data = null;
+                    response.Message = "Hubo un error al obtener los tipos";
+                    return response;
+                }
+                response.Success = true;
+                response.Data = _mapper.Map<List<TipoDTO>>(tipos);
+                return response;
+
+            }
+            catch (Exception ex)
+            {
+
+                response.Success=false;
+                response.Data = null;
+                response.Message=ex.Message + " " + ex.InnerException;
+                return response;
+            }
+
+        }
+
+       
+
+        public async Task<BaseResponse<IEnumerable<SucursalDTO>>> GetAllSucursalesAsync()
+        {
+           var response = new BaseResponse<IEnumerable<SucursalDTO>>();
+            try
+            {
+                var sucursales = await _sucursalRepository.GetAllSucursalAsync();
+
+                if (sucursales==null)
+                {
+                    response.Success = false;
+                    response.Data = null;
+                    response.Message = "Hubo un problema buscando las sucursales";
+                    return response;
+                }
+                response.Success = true;
+                response.Data=_mapper.Map<List<SucursalDTO>>(sucursales);
+                return response;
+         
+            }
+            catch (Exception ex)
+            {
+
+                response.Success = false;
+                response.Data = null;
+                response.Message = "Error obteniendo o mapeando las sucursales : " + ex.InnerException;
+                return response;
+            }
+        }
+
+
         public async Task<BaseResponse<SucursalDTO>> GetSucursalMostRecentNotBuenosAiresAsync()
         {
             var response = new BaseResponse<SucursalDTO>();
@@ -114,5 +201,6 @@ namespace API_Sucursales_Practica.Services
 
         }
 
+      
     }
 }

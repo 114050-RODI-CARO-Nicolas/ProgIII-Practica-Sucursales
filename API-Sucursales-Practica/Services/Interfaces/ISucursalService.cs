@@ -12,6 +12,12 @@ namespace API_Sucursales_Practica.Services.Interfaces
 
         Task<BaseResponse<SucursalDTO>> CreateSucursalAsync(CreateSucursalDTO createDTO);
 
+        Task<BaseResponse<IEnumerable<SucursalDTO>>> GetAllSucursalesAsync();
+
+        Task<BaseResponse<IEnumerable<ProvinciaDTO>>> GetAllProvinciasAsync();
+
+        Task<BaseResponse<IEnumerable<TipoDTO>>> GetAllTiposAsync();
+
 
     }
 }

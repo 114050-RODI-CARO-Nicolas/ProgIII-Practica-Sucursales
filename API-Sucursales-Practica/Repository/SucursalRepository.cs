@@ -20,7 +20,27 @@ namespace API_Sucursales_Practica.Repository
             _mapper=mapper;
         }
 
-    
+        public async Task<IEnumerable<ProvinciaEntity>> GetAllProvinciaAsync()
+        {
+            var allProvincias = await _context.Provincias.ToListAsync();
+            return allProvincias;
+        }
+
+        public async Task<IEnumerable<TipoEntity>> GetAllTipoAsync()
+        {
+            var allTipos = await _context.Tipos.ToListAsync();
+            return allTipos;
+
+        }
+
+
+        public async Task<IEnumerable<SucursalEntity>> GetAllSucursalAsync()
+        {
+           var allSucursales = await _context.Sucursales.ToListAsync();
+           return allSucursales;
+        }
+
+
 
         public async Task<SucursalEntity> GetSucursalMostRecentNotBuenosAiresAsync()
         {
@@ -100,6 +120,6 @@ namespace API_Sucursales_Practica.Repository
 
         }
 
-
+        
     }
 }

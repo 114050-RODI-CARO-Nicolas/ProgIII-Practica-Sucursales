@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Sucursal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mt">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand">Gestión de Sucursales</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarScroll" aria-controls="navbarScroll"
+            aria-expanded="false" aria-label="Menu de navegacion">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link" href="sucursales.html">Sucursales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="crear-sucursal.html">Nueva Sucursal</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1>Crear Nueva Sucursal</h1>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <form id="formCrear">
+                    <div class="form-group">
+                        <label for="nombreInput">Nombre</label>
+                        <input type="text" class="form-control" id="nombreInput" name="nombreInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="ciudadInput">Ciudad</label>
+                        <input type="text" class="form-control" id="ciudadInput" name="ciudadInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="provinciaSelect">Provincia</label>
+                        <select class="form-control" id="provinciaSelect" name="provinciaSelect"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipoSelect">Tipo</label>
+                        <select class="form-control" id="tipoSelect" name="tipoSelect"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefonoInput">Teléfono</label>
+                        <input type="text" class="form-control" id="telefonoInput" name="telefonoInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreTitularInput">Nombre Titular</label>
+                        <input type="text" class="form-control" id="nombreTitularInput" name="nombreTitularInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidoTitularInput">Apellido Titular</label>
+                        <input type="text" class="form-control" id="apellidoTitularInput" name="apellidoTitularInput">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear Sucursal</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+
+    <script src="js/crear-vanilla.js"></script>
+    <!-- <script src="js/crear-jquery.js"></script> -->
+</body>
+</html>

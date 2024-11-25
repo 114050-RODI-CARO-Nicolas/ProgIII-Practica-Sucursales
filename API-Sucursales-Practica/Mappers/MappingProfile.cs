@@ -10,6 +10,19 @@ namespace API_Sucursales_Practica.Mappers
         public MappingProfile()
         {
 
+            CreateMap<ProvinciaEntity, ProvinciaDTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src =>
+                    src.Id.ToString()
+                ));
+
+            CreateMap<TipoEntity, TipoDTO>()
+             .ForMember(dest => dest.Id, opt => opt.MapFrom(src =>
+                 src.Id.ToString()
+             ));
+
+            CreateMap<ConfiguracionEntity, ConfiguracionDTO>().ReverseMap();
+
+
             CreateMap<CreateSucursalDTO, SucursalEntity>()
                 .ForMember(dest => dest.IdTipo, opt => opt.MapFrom(src =>
                     string.IsNullOrEmpty(src.IdTipo) ? Guid.Empty : Guid.Parse(src.IdTipo)))
@@ -95,8 +108,7 @@ namespace API_Sucursales_Practica.Mappers
 
 
 
-            CreateMap<ConfiguracionEntity, ConfiguracionDTO>().ReverseMap();
-
+    
 
 
 

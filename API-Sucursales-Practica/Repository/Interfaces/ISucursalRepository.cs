@@ -11,5 +11,14 @@ namespace API_Sucursales_Practica.Repository.Interfaces
         Task<SucursalEntity> CreateSucursalAsync(CreateSucursalDTO createDTO);
         Task<SucursalEntity> UpdateSucursalByIdAsync(UpdateSucursalDTO updateDTO);
 
+        Task<IEnumerable<SucursalEntity>> GetAllSucursalAsync();
+
+        Task<IEnumerable<ProvinciaEntity>> GetAllProvinciaAsync();
+        
+        Task<IEnumerable<TipoEntity>> GetAllTipoAsync();
+
+
+
+
     }
 }

@@ -30,8 +30,40 @@ namespace API_Sucursales_Practica.Controllers
             return Ok(response);
         }
 
+        [HttpGet("provincias")]
+        public async Task<IActionResult> GetAllProvincias()
+        {
+            var response = await _sucursalService.GetAllProvinciasAsync();
+            if (!response.Success)
+            {
+                return StatusCode(500, response);
+            }
+            return Ok(response);
+        }
 
-        
+        [HttpGet("tipos")]
+        public async Task<IActionResult> GetAllTipos()
+        {
+            var response = await _sucursalService.GetAllTiposAsync();
+            if (!response.Success)
+            {
+                return StatusCode(500, response);
+            }
+            return Ok(response);
+        }
+
+
+
+        [HttpGet("sucursales")]
+        public async Task<IActionResult> GetAllSucursales()
+        {
+            var response = await _sucursalService.GetAllSucursalesAsync();
+            if (!response.Success)
+            {
+                return StatusCode(500, response);
+            }
+            return Ok(response);
+        }
 
         [HttpGet("sucursales/most-recent/not-buenos-aires")]
         public async Task<IActionResult> GetSucursalMostRecetNotBsAs()
