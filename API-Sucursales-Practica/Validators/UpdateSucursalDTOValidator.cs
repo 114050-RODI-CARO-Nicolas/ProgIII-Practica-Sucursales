@@ -23,8 +23,8 @@ namespace API_Sucursales_Practica.Validators
 
             When(x => !string.IsNullOrEmpty(x.IdProvincia), () =>
             {
-                RuleFor(x => x.IdTipo)
-                .Must(idTipo => Guid.TryParse(idTipo, out _))
+                RuleFor(x => x.IdProvincia)
+                .Must(idProvincia => Guid.TryParse(idProvincia, out _))
                 .WithMessage("El formato del campo IdProvincia debe ser parseable a GUID");
             });
 

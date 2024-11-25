@@ -41,11 +41,27 @@ namespace API_Sucursales_Practica.Mappers
                 .ForMember(dest => dest.IdProvincia, opt => opt.MapFrom((src, dest) =>
                     !string.IsNullOrEmpty(src.IdProvincia) ? Guid.Parse(src.IdProvincia) : dest.IdProvincia
                 ))
-                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) =>
-                    srcMember !=null
-                ));
+                .ForMember(dest => dest.FechaAlta, opt => opt.MapFrom((src, dest) =>
+                    src.FechaAlta.HasValue ? src.FechaAlta.Value : dest.FechaAlta))
+                  .ForAllMembers(opts => opts.Condition((src, dest, srcMember) =>
+                        srcMember != null && (!(srcMember is string) || !string.IsNullOrEmpty((string)srcMember))));
+
 
             /*
+             
+            .ForMember(dest => dest.FechaAlta, opt => opt.MapFrom((src, dest) =>
+                src.FechaAlta.HasValue ? src.FechaAlta.Value : dest.FechaAlta))
+
+            dest.FechaAlta: el campo de destino en la entidad
+            (src, dest) =>: nos da acceso tanto al source (DTO) como al destination (entity)
+            src.FechaAlta.HasValue: verifica si el DTO tiene un valor para la fecha (porque ahora es nullable)
+            Si tiene valor (?), usa ese valor (src.FechaAlta.Value)
+            Si no tiene valor (:), mantiene el valor existente en la entidad (dest.FechaAlta)
+
+
+
+  
+            
             .ForAllMembers(): Aplica una configuración a todos los miembros del mapeo.
             opts.Condition((src, dest, srcMember) => srcMember != null):
 
@@ -54,6 +70,26 @@ namespace API_Sucursales_Practica.Mappers
             srcMember: es el valor específico del miembro que se está mapeando
 
             La condición srcMember != null significa que solo se realizará el mapeo si el valor en el DTO no es null
+            
+            
+            -La condicion srcMember != null && (!(srcMember is string) || !string.IsNullOrEmpty((string)srcMember))
+
+                    tiene dos partes unidas por AND (&&):
+
+                    srcMember != null: el valor no debe ser null
+                    (!(srcMember is string) || !string.IsNullOrEmpty((string)srcMember)):
+
+                    Si NO es string (!(srcMember is string)), la condición es verdadera
+                    Si ES string (||), debe NO estar vacío (!string.IsNullOrEmpty)
+
+
+                    En otras palabras, solo se mapeará un campo si:
+
+                    No es null Y
+                    Si es string, no está vacío
+                    Si no es string, se mapea normalmente
+
+
 
             */
 

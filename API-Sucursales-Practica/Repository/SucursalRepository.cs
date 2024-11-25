@@ -51,8 +51,16 @@ namespace API_Sucursales_Practica.Repository
                 }
                 _mapper.Map(updateDTO, foundSucursal);
                 await _context.SaveChangesAsync();
+
+                //Recargar la entidad
+
+                var updatedSucursal = await _context.Sucursales
+                    .Include(x => x.Provincia)
+                    .Include(x => x.Tipo)
+                    .FirstOrDefaultAsync(x => x.Id == foundSucursal.Id);
+
                 await transaction.CommitAsync();
-                return foundSucursal;
+                return updatedSucursal;
 
             }
             catch 

@@ -41,7 +41,7 @@ namespace API_Sucursales_Practica.Controllers
             {
                 return StatusCode(500, response);
             }
-            return Ok();    
+            return Ok(response);    
         }
 
         [HttpPost("sucursales")]
@@ -57,7 +57,7 @@ namespace API_Sucursales_Practica.Controllers
         }
 
         [HttpPut("sucursales")]
-        public async Task<IActionResult> UpdateSucursal(UpdateSucursalDTO updateSucursalDTO)
+        public async Task<IActionResult> UpdateSucursal( [FromBody] UpdateSucursalDTO updateSucursalDTO)
         {
             var response = await _sucursalService.UpdateSucursalAsync(updateSucursalDTO);
             if (!response.Success)
